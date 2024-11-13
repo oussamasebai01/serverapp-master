@@ -17,21 +17,21 @@ export class ServerService {
 
   servers$ = <Observable<CustomResponse>>(
     this._http
-      .get<CustomResponse>(`${this.env.API_URL}/list`)
+      .get<CustomResponse>(`http://192.168.100.102:8002/server/list`)
       .pipe(tap(console.log), catchError(this.handleError))
   );
 
   save$ = (server: Server) =>
     <Observable<CustomResponse>>(
       this._http
-        .post<CustomResponse>(`${this.env.API_URL}/save`, server)
+        .post<CustomResponse>(`http://192.168.100.102:8002/server/save`, server)
         .pipe(tap(console.log), catchError(this.handleError))
     );
 
   ping$ = (ipAddress: string) =>
     <Observable<CustomResponse>>(
       this._http
-        .get<CustomResponse>(`${this.env.API_URL}/ping/${ipAddress}`)
+        .get<CustomResponse>(`http://192.168.100.102:8002/server/ping/${ipAddress}`)
         .pipe(tap(console.log), catchError(this.handleError))
     );
 
@@ -65,7 +65,7 @@ export class ServerService {
   delete$ = (serverId: number) =>
     <Observable<CustomResponse>>(
       this._http
-        .delete<CustomResponse>(`${this.env.API_URL}/delete/${serverId}`)
+        .delete<CustomResponse>(`http://192.168.100.102:8002/server/delete/${serverId}`)
         .pipe(tap(console.log), catchError(this.handleError))
     );
 
