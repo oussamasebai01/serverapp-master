@@ -11,27 +11,25 @@ import { Status } from '../enum/status.enum';
   providedIn: 'root',
 })
 export class ServerService {
-  env = environment;
-
   constructor(private _http: HttpClient) {}
 
   servers$ = <Observable<CustomResponse>>(
     this._http
-      .get<CustomResponse>(`http://192.168.100.102:8002/server/list`)
+      .get<CustomResponse>(`http://192.168.100.102:8002/list`)
       .pipe(tap(console.log), catchError(this.handleError))
   );
 
   save$ = (server: Server) =>
     <Observable<CustomResponse>>(
       this._http
-        .post<CustomResponse>(`http://192.168.100.102:8002/server/save`, server)
+        .post<CustomResponse>(`http://192.168.100.102:8002/save`, server)
         .pipe(tap(console.log), catchError(this.handleError))
     );
 
   ping$ = (ipAddress: string) =>
     <Observable<CustomResponse>>(
       this._http
-        .get<CustomResponse>(`http://192.168.100.102:8002/server/ping/${ipAddress}`)
+        .get<CustomResponse>(`http://192.168.100.102:8002/ping/${ipAddress}`)
         .pipe(tap(console.log), catchError(this.handleError))
     );
 
@@ -65,7 +63,7 @@ export class ServerService {
   delete$ = (serverId: number) =>
     <Observable<CustomResponse>>(
       this._http
-        .delete<CustomResponse>(`http://192.168.100.102:8002/server/delete/${serverId}`)
+        .delete<CustomResponse>(`http://192.168.100.102:8002/delete/${serverId}`)
         .pipe(tap(console.log), catchError(this.handleError))
     );
 
